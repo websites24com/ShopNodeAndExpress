@@ -2,10 +2,20 @@
 
 const Product = require('../models/product')
 
+// GET /admin/add-product
+exports.getAddProduct = (req, res, next) => {
+  res.render('admin/add-product', {
+    pageTitle: 'Add Product',
+    path: '/admin/add-product',
+    formCSS: true,
+    productCSS: true,
+    activeAddProduct: true
+  });
+};
 
 // GET /admin/add-product
 exports.getAddProduct = (req, res, next) => {
-  res.render('add-product', {
+  res.render('admin/add-product', {
     pageTitle: 'Add Product',
     path: '/admin/add-product',
     formCSS: true,
@@ -21,14 +31,17 @@ product.save();
 res.redirect('/');
 };
 
-// GET /
+
+// GET /admin/products
 exports.getProducts = (req, res, next) => {
-const products = Product.fetchAll((products) => {
-    res.render('shop', {
+  Product.fetchAll((products) => {
+    res.render('admin/products', {
     prods: products,
-    pageTitle: 'Shop',
-    path: '/'
+    pageTitle: 'Admin Products',
+    path: '/admin/products',
+   
   });
 });
-  
 };
+
+
